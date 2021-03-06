@@ -1,0 +1,7 @@
+.class {
+  outline: none;
+  background: linear-gradient(red, blue, green);
+  border: none;
+  transition: all 1s;
+  cursor: pointer;
+}
