@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import {
   addTaskAction,
   changeThemeAction,
+  deleteTaskAction,
+  doneTaskAction,
+  redoTaskAction,
+  editTaskAction,
 } from "../../redux/actions/ToDoListAction";
 import { Container } from "../../ComponentToDoList/Container";
 import { ThemeProvider } from "styled-components";
@@ -33,13 +37,25 @@ class ToDoList extends Component {
           <Tr key={index}>
             <Th>{task.taskName}</Th>
             <Th style={{ textAlign: "right" }}>
-              <Button>
+              <Button
+                onClick={() => {
+                  this.props.dispatch(deleteTaskAction(task.id));
+                }}
+              >
                 <i className="fa fa-trash"></i>
               </Button>
-              <Button>
+              <Button
+                onClick={() => {
+                  this.props.dispatch(editTaskAction(task));
+                }}
+              >
                 <i className="fa fa-edit"></i>
               </Button>
-              <Button>
+              <Button
+                onClick={() => {
+                  this.props.dispatch(doneTaskAction(task.id));
+                }}
+              >
                 <i className="fa fa-check"></i>
               </Button>
             </Th>
@@ -54,8 +70,19 @@ class ToDoList extends Component {
         <Tr key={index}>
           <Th>{task.taskName}</Th>
           <Th style={{ textAlign: "right" }}>
-            <Button>
+            <Button
+              onClick={() => {
+                this.props.dispatch(deleteTaskAction(task.id));
+              }}
+            >
               <i className="fa fa-trash"></i>
+            </Button>
+            <Button
+              onClick={() => {
+                this.props.dispatch(redoTaskAction(task.id));
+              }}
+            >
+              <i class="fa fa-redo-alt"></i>
             </Button>
           </Th>
         </Tr>
@@ -77,6 +104,7 @@ class ToDoList extends Component {
       );
     });
   };
+
   render() {
     return (
       <ThemeProvider theme={this.props.themeToDoList}>
@@ -91,6 +119,7 @@ class ToDoList extends Component {
           </Dropdown>
           <Heading3>To Do List</Heading3>
           <TextField
+            value={this.state.taskName}
             onChange={(e) => {
               this.setState(
                 {
@@ -137,11 +166,21 @@ class ToDoList extends Component {
       </ThemeProvider>
     );
   }
+  //đây là lifecycle trả về props cũ và state cũ của component trước khi render (lifecycle này chạy sau render)
+  componentDidUpdate(prevProps, prevState) {
+    //so sánh nếu như props trước đó (taskEdit trước mà khác taskEdit hiện tại thì mình mới setState)
+    if (prevProps.taskEdit.id !== this.props.taskEdit.id) {
+      this.setState({
+        taskName: this.props.taskEdit.taskName,
+      });
+    }
+  }
 }
 
 const mapStateToProps = (state) => ({
   themeToDoList: state.toDoListReducer.themeToDoList,
   taskList: state.toDoListReducer.taskList,
+  taskEdit: state.toDoListReducer.taskEdit,
 });
 
 export default connect(mapStateToProps)(ToDoList);
