@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/StyledJSS/static/css/main.9d5b29c0.chunk.css",
+    "main.js": "/StyledJSS/static/js/main.bb47657f.chunk.js",
+    "main.js.map": "/StyledJSS/static/js/main.bb47657f.chunk.js.map",
+    "runtime-main.js": "/StyledJSS/static/js/runtime-main.1521b726.js",
+    "runtime-main.js.map": "/StyledJSS/static/js/runtime-main.1521b726.js.map",
+    "static/js/2.94afc30c.chunk.js": "/StyledJSS/static/js/2.94afc30c.chunk.js",
+    "static/js/2.94afc30c.chunk.js.map": "/StyledJSS/static/js/2.94afc30c.chunk.js.map",
+    "static/js/3.28bd1468.chunk.js": "/StyledJSS/static/js/3.28bd1468.chunk.js",
+    "static/js/3.28bd1468.chunk.js.map": "/StyledJSS/static/js/3.28bd1468.chunk.js.map",
+    "index.html": "/StyledJSS/index.html",
+    "static/css/main.9d5b29c0.chunk.css.map": "/StyledJSS/static/css/main.9d5b29c0.chunk.css.map",
+    "static/js/2.94afc30c.chunk.js.LICENSE.txt": "/StyledJSS/static/js/2.94afc30c.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/StyledJSS/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1521b726.js",
+    "static/js/2.94afc30c.chunk.js",
+    "static/css/main.9d5b29c0.chunk.css",
+    "static/js/main.bb47657f.chunk.js"
+  ]
+}
