@@ -14,4 +14,11 @@ export const Button = styled.button`
     border: ${(props) => props.theme.borderButton};
   }
   margin-left: 10px;
+  &:disabled {
+    cursor: not-allowed;
+    color: ${(props) => props.theme.colorDisable};
+    &:hover {
+      background-color: inherit;
+    }
+  }
 `;

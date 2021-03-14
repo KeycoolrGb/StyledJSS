@@ -8,6 +8,7 @@ import {
   DONE_TASK,
   REDO_TASK,
   EDIT_TASK,
+  UPDATE_TASK,
 } from "../types/ToDoListType";
 import { arrTheme } from "../../theme/managerTheme";
 
@@ -20,7 +21,7 @@ const initialState = {
     { id: "task-4", taskName: "task 4", done: false },
     { id: "task-5", taskName: "task 5", done: true },
   ],
-  taskEdit: { id: "task-1", taskName: "task 1", done: false },
+  taskEdit: { id: "task-1", taskName: "task 1", done: true },
 };
 
 const toDoListReducer = (state = initialState, action) => {
@@ -105,6 +106,23 @@ const toDoListReducer = (state = initialState, action) => {
     }
     case EDIT_TASK: {
       return { ...state, taskEdit: action.task };
+    }
+    case UPDATE_TASK: {
+      // chỉnh sửa lại taskName của taskEdit
+      state.taskEdit = { ...state.taskEdit, taskName: action.taskName };
+
+      // tìm trong taskList cập nhật lại taskEdit người dùng update
+      let taskListUpdate = [...state.taskList];
+      let index = taskListUpdate.findIndex(
+        (task) => task.id === state.taskEdit.id
+      );
+      if (index !== -1) {
+        taskListUpdate[index] = state.taskEdit;
+      }
+      state.taskList = taskListUpdate;
+      state.taskEdit = { id: "-1", taskName: "", done: false };
+
+      return { ...state };
     }
     default:
       return { ...state };

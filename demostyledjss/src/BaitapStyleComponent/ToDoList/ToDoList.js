@@ -6,6 +6,7 @@ import {
   doneTaskAction,
   redoTaskAction,
   editTaskAction,
+  updateTaskAction,
 } from "../../redux/actions/ToDoListAction";
 import { Container } from "../../ComponentToDoList/Container";
 import { ThemeProvider } from "styled-components";
@@ -28,6 +29,7 @@ import { arrTheme } from "../../theme/managerTheme";
 class ToDoList extends Component {
   state = {
     taskName: "",
+    disabled: true,
   };
   renderTaskToDo = () => {
     return this.props.taskList
@@ -46,7 +48,14 @@ class ToDoList extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  this.props.dispatch(editTaskAction(task));
+                  this.setState(
+                    {
+                      disabled: false,
+                    },
+                    () => {
+                      this.props.dispatch(editTaskAction(task));
+                    }
+                  );
                 }}
               >
                 <i className="fa fa-edit"></i>
@@ -150,9 +159,27 @@ class ToDoList extends Component {
           >
             <i className="fa fa-plus"></i> Add task
           </Button>
-          <Button>
-            <i className="fa fa-upload"></i> Update task
-          </Button>
+          {this.state.disabled ? (
+            <Button
+              disabled
+              onClick={() => {
+                this.props.dispatch(updateTaskAction(this.state.taskName));
+              }}
+            >
+              <i className="fa fa-upload"></i> Update task
+            </Button>
+          ) : (
+            <Button
+              onClick={() => {
+                let { taskName } = this.state;
+                this.setState({ disabled: true, taskName: "" }, () => {
+                  this.props.dispatch(updateTaskAction(taskName));
+                });
+              }}
+            >
+              <i className="fa fa-upload"></i> Update task
+            </Button>
+          )}
           <hr />
           <Heading3>Task To Do</Heading3>
           <Table>

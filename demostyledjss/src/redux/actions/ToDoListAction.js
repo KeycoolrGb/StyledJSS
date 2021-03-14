@@ -5,6 +5,7 @@ import {
   DONE_TASK,
   EDIT_TASK,
   REDO_TASK,
+  UPDATE_TASK,
 } from "../../redux/types/ToDoListType";
 export const addTaskAction = (newTask) => ({
   type: ADD_TASK,
@@ -34,4 +35,9 @@ export const redoTaskAction = (taskId) => ({
 export const editTaskAction = (task) => ({
   type: EDIT_TASK,
   task,
+});
+
+export const updateTaskAction = (taskName) => ({
+  type: UPDATE_TASK,
+  taskName,
 });
